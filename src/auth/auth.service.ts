@@ -16,7 +16,7 @@ export class AuthService {
   }
 
   // Enviar código por SMS
-  async sendSmsCode(phone: string): Promise<{ success: boolean }> {
+  async sendSmsCode(phone: string): Promise<{ success: boolean, code: any }> {
     const code = Math.floor(100000 + Math.random() * 900000).toString(); // Código de 6 dígitos
 
     let user = await this.usersService.findByPhone(phone);  
@@ -35,7 +35,7 @@ export class AuthService {
     //   to: phone,
     // });
 
-    return { success: true };
+    return { success: true, code: code };
   }
 
   // Verificar código y generar tokens
